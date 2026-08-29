@@ -1,92 +1,1439 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<title>Apposite.NYC</title>
-<meta content="Apposite Design" property="og:title"/>
-<meta content="Bring your ideas to life with high-quality 3D renders and animations for business advertisements. Elevate your brand with stunning visuals and cutting-edge design." property="og:description"/>
-<meta content="images/logo_black_long.png" property="og:image"/>
-<meta content="Apposite Design" name="twitter:title"/>
-<meta content="Bring your ideas to life with high-quality 3D renders and animations for business advertisements. Elevate your brand with stunning visuals and cutting-edge design." name="twitter:description"/>
-<meta content="images/logo_black_long.png" name="twitter:image"/>
-<meta property="og:type" content="website"/>
-<meta content="summary_large_image" name="twitter:card"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<link href="css/apposite-nyc.webflow.shared.b3a6b0185.css" rel="stylesheet" type="text/css"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link href="https://fonts.gstatic.com" rel="preconnect"/>
-<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
-<script type="text/javascript">WebFont.load({  google: {    families: ["Oswald:200,300,400,500,600,700","Archivo:300,400,500,600,700","Archivo Black:300,400,500,600,700"]  }});</script>
-<script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
-<link href="images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
-<link href="images/app-icon.png" rel="apple-touch-icon"/>
-<style>
-body {
-    -ms-overflow-style: none;
-    overflow: -moz-scrollbars-none;
-}
-body::-webkit-scrollbar {
-    display: none;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Apposite Design — 3D Visualization</title>
+  <meta name="description" content="Apposite Design — 3D visualization for products, ideas, and brands.">
+  <meta property="og:title" content="Apposite Design">
+  <meta property="og:description" content="3D visualization for products, ideas, and brands.">
+  <meta property="og:image" content="images/logo_black_long.png">
+
+  <link rel="icon" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/app-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Archivo+Black&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Apposite palette sampled from the supplied logo */
+      --pink: #D14A8A;
+      --pink-dark: #C13B6E;
+      --green: #87A669;
+      --olive: #7A9155;
+      --yellow: #C5BA34;
+
+      --ink: #111111;
+      --muted: #6E6E6A;
+      --paper: #F8F8F6;
+      --white: #FFFFFF;
+      --line: #DDDDD8;
+      --max: 1440px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Archivo", Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img,
+    video {
+      display: block;
+      max-width: 100%;
+    }
+
+    .container {
+      width: min(calc(100% - 64px), var(--max));
+      margin: 0 auto;
+    }
+
+    /* ---------------- NAV ---------------- */
+
+    nav {
+      position: fixed;
+      z-index: 100;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 22px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--pink);
+      color: var(--white);
+      border-bottom: 1px solid rgba(17, 17, 17, .14);
+    }
+
+    .nav-logo {
+      font-family: "Archivo Black", "Archivo", Arial, sans-serif;
+      font-size: 18px;
+      letter-spacing: -.06em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .nav-links a {
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0;
+      height: 1px;
+      background: var(--yellow);
+      transition: width .25s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* ---------------- HERO ---------------- */
+
+    .hero {
+      min-height: 100svh;
+      padding: 120px 0 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 30px;
+    }
+
+    .hero-logo {
+      width: min(380px, 42vw);
+    }
+
+    .hero-kicker {
+      max-width: 280px;
+      padding-top: 6px;
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+
+    .hero-kicker strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .hero-title {
+      margin: 55px 0 30px;
+      max-width: 1150px;
+      font-family: "Archivo", Arial, sans-serif;
+      font-size: clamp(70px, 11vw, 170px);
+      line-height: .86;
+      font-weight: 500;
+      letter-spacing: -.05em;
+      text-transform: uppercase;
+    }
+
+    .hero-title .accent {
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero-title .accent::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 4%;
+      bottom: -7px;
+      height: 5px;
+      background: linear-gradient(90deg, var(--yellow), var(--pink));
+      transform: skewX(-18deg);
+      transform-origin: left;
+    }
+
+    .hero-video-wrap {
+      position: relative;
+    }
+
+    .hero-video-wrap::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 32%;
+      height: 32%;
+      left: -2%;
+      bottom: -5%;
+      background: var(--green);
+      opacity: .13;
+      filter: blur(45px);
+    }
+
+    .hero-video-wrap::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 28%;
+      height: 30%;
+      right: -2%;
+      top: -4%;
+      background: var(--pink);
+      opacity: .12;
+      filter: blur(50px);
+    }
+
+    .hero-video {
+      width: 100%;
+      height: min(58vh, 720px);
+      min-height: 390px;
+      object-fit: cover;
+      background: #E7E7E3;
+    }
+
+    .hero-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 18px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .scroll-link {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      font-weight: 600;
+    }
+
+    .arrow {
+      color: var(--pink);
+      transition: transform .25s ease;
+    }
+
+    .scroll-link:hover .arrow {
+      transform: translateY(4px);
+    }
+
+    /* ---------------- GENERAL SECTIONS ---------------- */
+
+    section {
+      padding: 145px 0;
+    }
+
+    .section-label {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+      margin-bottom: 55px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .section-label .number {
+      color: var(--pink);
+    }
+
+    .section-label::before {
+      content: "";
+      width: 34px;
+      height: 3px;
+      margin-right: 12px;
+      margin-top: 3px;
+      background: linear-gradient(90deg, var(--pink), var(--yellow), var(--green));
+      transform: skewX(-22deg);
+    }
+
+    .section-intro {
+      max-width: 950px;
+      margin-bottom: 90px;
+      font-family: "Archivo", Arial, sans-serif;
+      font-size: clamp(42px, 6vw, 86px);
+      line-height: .98;
+      letter-spacing: -.035em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .section-intro .accent-word {
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-intro .accent-word::after {
+      content: "";
+      position: absolute;
+      left: 2%;
+      right: 2%;
+      bottom: 1px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--green), var(--yellow), var(--pink));
+      transform: skewX(-20deg);
+    }
+
+    /* ---------------- WORK ---------------- */
+
+    .project {
+      margin-bottom: 110px;
+    }
+
+    .project-image {
+      position: relative;
+      overflow: hidden;
+      background: #E7E7E3;
+      aspect-ratio: 16 / 9;
+    }
+
+    .project-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 2px solid transparent;
+      pointer-events: none;
+      transition: border-color .35s ease;
+    }
+
+    .project:nth-of-type(4n+1) .project-image::after {
+      border-color: rgba(209, 74, 138, .16);
+    }
+
+    .project:nth-of-type(4n+2) .project-image::after {
+      border-color: rgba(197, 186, 52, .16);
+    }
+
+    .project:nth-of-type(4n+3) .project-image::after {
+      border-color: rgba(135, 166, 105, .16);
+    }
+
+    .project:nth-of-type(4n) .project-image::after {
+      border-color: rgba(122, 145, 85, .16);
+    }
+
+    .project:hover .project-image::after {
+      border-color: var(--pink);
+    }
+
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .7s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .project:hover .project-image img {
+      transform: scale(1.025);
+    }
+
+    .project-meta {
+      display: grid;
+      grid-template-columns: 70px 2fr 1fr;
+      gap: 30px;
+      padding-top: 17px;
+      border-top: 1px solid var(--line);
+      margin-top: 12px;
+    }
+
+    .project-number {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--pink);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .project-title {
+      font-family: "Archivo", Arial, sans-serif;
+      font-size: clamp(30px, 4vw, 55px);
+      line-height: 1;
+      text-transform: uppercase;
+      font-weight: 400;
+      letter-spacing: -.025em;
+    }
+
+    .project-description {
+      margin: 12px 0 0;
+      max-width: 600px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .project-type {
+      text-align: right;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--muted);
+    }
+
+    /* Alternating subtle color accents */
+    .project:nth-of-type(3n+1) .project-number {
+      color: var(--pink);
+    }
+
+    .project:nth-of-type(3n+2) .project-number {
+      color: var(--yellow);
+    }
+
+    .project:nth-of-type(3n) .project-number {
+      color: var(--green);
+    }
+
+    /* ---------------- PROJECT GRID ---------------- */
+
+    .project-featured {
+      margin-bottom: 125px;
+    }
+
+    .project-featured .project-image {
+      aspect-ratio: 2.15 / 1;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 28px;
+      row-gap: 105px;
+    }
+
+    .project-card {
+      margin-bottom: 0;
+    }
+
+    .project-card .project-image {
+      aspect-ratio: 1 / .78;
+    }
+
+    .project-card .project-meta {
+      grid-template-columns: 42px 1fr;
+      gap: 18px;
+    }
+
+    .project-card .project-type {
+      grid-column: 2;
+      text-align: left;
+      margin-top: 4px;
+    }
+
+    .project-card .project-title {
+      font-size: clamp(28px, 3vw, 44px);
+    }
+
+    .project-card .project-description {
+      max-width: 450px;
+    }
+
+    /* ---------------- SERVICES ---------------- */
+
+    .services {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 70px;
+    }
+
+    .services-title {
+      font-family: "Archivo", Arial, sans-serif;
+      font-size: clamp(42px, 6vw, 82px);
+      line-height: .92;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .services-title span {
+      position: relative;
+      display: inline-block;
+    }
+
+    .services-title span::after {
+      content: "";
+      position: absolute;
+      width: 34px;
+      height: 8px;
+      right: -46px;
+      bottom: 9px;
+      background: linear-gradient(90deg, var(--yellow), var(--pink));
+      transform: skewX(-25deg);
+    }
+
+    .service-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .service {
+      display: grid;
+      grid-template-columns: 55px 1fr 20px;
+      gap: 20px;
+      align-items: start;
+      padding: 27px 0;
+      border-bottom: 1px solid var(--line);
+      transition: padding-left .25s ease;
+    }
+
+    .service:hover {
+      padding-left: 10px;
+    }
+
+    .service-number {
+      font-family: "Archivo", Arial, sans-serif;
+      color: var(--muted);
+    }
+
+    .service h3 {
+      margin: 0 0 8px;
+      font-family: "Archivo", Arial, sans-serif;
+      font-size: clamp(28px, 3vw, 42px);
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .service p {
+      margin: 0;
+      max-width: 650px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .service-dot {
+      width: 8px;
+      height: 8px;
+      margin-top: 8px;
+      border-radius: 50%;
+      background: var(--pink);
+    }
+
+    .service:nth-child(2) .service-dot {
+      background: var(--yellow);
+    }
+
+    .service:nth-child(3) .service-dot {
+      background: var(--green);
+    }
+
+    .service:nth-child(4) .service-dot {
+      background: var(--olive);
+    }
+
+    /* ---------------- ABOUT ---------------- */
+
+    #about {
+      position: relative;
+    }
+
+    #about::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 24%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--green), var(--yellow), var(--pink), transparent);
+      opacity: .65;
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: start;
+    }
+
+    .about-title {
+      font-family: "Archivo", Arial, sans-serif;
+      font-size: clamp(50px, 7vw, 100px);
+      line-height: .88;
+      text-transform: uppercase;
+      font-weight: 400;
+      letter-spacing: -.04em;
+    }
+
+    .about-title .green {
+      color: var(--green);
+    }
+
+    .about-copy {
+      max-width: 600px;
+      font-size: clamp(19px, 2vw, 27px);
+      line-height: 1.35;
+    }
+
+    .about-copy p {
+      margin: 0 0 30px;
+    }
+
+    .about-small {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .tool-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 30px;
+    }
+
+    .tool-tag {
+      padding: 8px 11px;
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      transition: border-color .2s ease, background .2s ease;
+    }
+
+    .tool-tag:hover {
+      border-color: var(--pink);
+      background: rgba(209, 74, 138, .08);
+    }
+
+    /* ---------------- CONTACT ---------------- */
+
+    .contact {
+      padding-bottom: 40px;
+    }
+
+    .contact-box {
+      position: relative;
+      overflow: hidden;
+      background: var(--ink);
+      color: white;
+      padding: clamp(45px, 8vw, 110px);
+    }
+
+    .contact-box::before,
+    .contact-box::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(10px);
+      opacity: .75;
+      pointer-events: none;
+    }
+
+    .contact-box::before {
+      width: 260px;
+      height: 260px;
+      right: -70px;
+      top: -100px;
+      background: var(--pink);
+    }
+
+    .contact-box::after {
+      width: 180px;
+      height: 180px;
+      left: -60px;
+      bottom: -80px;
+      background: var(--green);
+    }
+
+    .contact-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-label {
+      color: #BDBDB8;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: 30px;
+    }
+
+    .contact-title {
+      max-width: 1000px;
+      margin: 0 0 55px;
+      font-family: "Archivo", Arial, sans-serif;
+      font-size: clamp(65px, 10vw, 150px);
+      line-height: .86;
+      text-transform: uppercase;
+      font-weight: 400;
+      letter-spacing: -.045em;
+    }
+
+    .contact-title span {
+      color: var(--yellow);
+    }
+
+    .contact-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+      border-bottom: 1px solid white;
+      padding-bottom: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .contact-button span {
+      color: var(--pink);
+      transition: transform .25s ease;
+    }
+
+    .contact-button:hover span {
+      transform: translateX(7px);
+    }
+
+    .brand-strip {
+      display: flex;
+      height: 5px;
+      margin-top: 24px;
+    }
+
+    .brand-strip .swatch {
+      flex: 1;
+    }
+
+    .brand-strip .pink { background: var(--pink); }
+    .brand-strip .yellow { background: var(--yellow); }
+    .brand-strip .green { background: var(--green); }
+    .brand-strip .olive { background: var(--olive); }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      padding: 28px 0;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--muted);
+    }
+
+
+    /* ---------------- FLOATING LOTTIE CONTACT ---------------- */
+
+    .lottie-contact {
+      position: fixed;
+      z-index: 150;
+      right: 28px;
+      bottom: 28px;
+      display: block;
+      width: 118px;
+      height: 118px;
+      border-radius: 50%;
+      isolation: isolate;
+      filter: drop-shadow(0 10px 24px rgba(0,0,0,.14));
+      transition: transform .3s ease, filter .3s ease;
+    }
+
+    .lottie-contact::before {
+      content: "";
+      position: absolute;
+      inset: -7px;
+      border: 2px solid var(--yellow);
+      border-radius: 50%;
+      z-index: -1;
+      transition: inset .3s ease, border-color .3s ease;
+    }
+
+    .lottie-contact::after {
+      content: "";
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      right: 4px;
+      top: 11px;
+      border-radius: 50%;
+      background: var(--pink);
+      box-shadow: 0 0 0 6px rgba(209,74,138,.12);
+    }
+
+    .lottie-contact:hover {
+      transform: scale(1.06);
+      filter: drop-shadow(0 14px 28px rgba(0,0,0,.18));
+    }
+
+    .lottie-contact:hover::before {
+      inset: -11px;
+      border-color: var(--green);
+    }
+
+    .lottie-contact-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      border-radius: 50%;
+      overflow: hidden;
+      background: rgba(255,255,255,.96);
+      border: 1px solid rgba(17,17,17,.12);
+    }
+
+    #contact-lottie {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    #contact-lottie svg {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+
+    .lottie-contact-label {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      color: var(--ink);
+      pointer-events: none;
+      background: rgba(255,255,255,.78);
+      padding: 5px 7px;
+      border-radius: 999px;
+      backdrop-filter: blur(4px);
+    }
+
+    .lottie-contact-label b {
+      color: var(--pink);
+      font-size: 12px;
+      margin-left: 3px;
+    }
+
+    /* ---------------- MOBILE ---------------- */
+
+    @media (max-width: 700px) {
+      .container {
+        width: min(calc(100% - 32px), var(--max));
+      }
+
+      nav {
+        padding: 17px 16px;
+        background: var(--pink);
+      }
+
+      .nav-links {
+        gap: 13px;
+        font-size: 8px;
+      }
+
+      .hero {
+        padding-top: 90px;
+      }
+
+      .hero-logo {
+        width: 210px;
+      }
+
+      .hero-kicker {
+        display: none;
+      }
+
+      .hero-title {
+        margin-top: 45px;
+        font-size: clamp(55px, 18vw, 100px);
+      }
+
+      .hero-video {
+        min-height: 330px;
+        height: 50vh;
+      }
+
+      .hero-bottom {
+        gap: 15px;
+        font-size: 9px;
+      }
+
+      section {
+        padding: 90px 0;
+      }
+
+      .section-intro {
+        margin-bottom: 55px;
+      }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+        row-gap: 70px;
+      }
+
+      .project-featured {
+        margin-bottom: 75px;
+      }
+
+      .project {
+        margin-bottom: 70px;
+      }
+
+      .project-meta {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .project-type {
+        text-align: left;
+      }
+
+      .services,
+      .about {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+
+      .service {
+        grid-template-columns: 38px 1fr 15px;
+      }
+
+      .service:hover {
+        padding-left: 0;
+      }
+
+      .contact-box {
+        padding: 45px 25px;
+      }
+
+      .lottie-contact {
+        right: 16px;
+        bottom: 16px;
+        width: 82px;
+        height: 82px;
+      }
+
+      .lottie-contact::after {
+        width: 9px;
+        height: 9px;
+        right: 1px;
+        top: 7px;
+      }
+
+      .lottie-contact-label {
+        font-size: 7px;
+        padding: 4px 5px;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+  </style>
 </head>
-<body class="body-2">
-<section class="section-2">
-  <div class="w-layout-blockcontainer container-13 w-container">
-    <img src="images/logo_black_long.png" loading="lazy" sizes="100vw" srcset="images/logo_black_long-p-500.png 500w, images/logo_black_long-p-800.png 800w, images/logo_black_long-p-1080.png 1080w, images/logo_black_long-p-1600.png 1600w, images/logo_black_long-p-2000.png 2000w, images/logo_black_long-p-2600.png 2600w, images/logo_black_long.png 3060w" alt="Apposite Design logo" class="image-15"/>
-    <div class="w-layout-blockcontainer container-12 w-container">
-      <div data-poster-url="images/idle_loop-poster.jpg" data-video-urls="images/idle_loop.mp4" data-autoplay="true" data-loop="true" data-wf-ignore="true" class="background-video-8 w-background-video w-background-video-atom">
-        <video id="34611a55-c3fb-2335-6480-1e10f4079242-video" autoplay="" loop="" style="background-image:url(&quot;images/idle_loop-poster.jpg&quot;)" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
-          <source src="images/idle_loop.mp4" data-wf-ignore="true"/>
-        </video>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="#" class="nav-logo" aria-label="Apposite Design"></a>
+
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="container">
+
+        <div class="hero-top">
+          <img
+            src="images/logo_black_long.png"
+            alt="Apposite Design"
+            class="hero-logo"
+          >
+
+          <div class="hero-kicker">
+            <strong>3D visualization</strong><br>
+            for products, ideas,<br>
+            and brands.
+          </div>
+        </div>
+
+        <h1 class="hero-title">
+          Your ideas,<br>
+          <span class="accent">visualized.</span>
+        </h1>
+
+        <div class="hero-video-wrap">
+          <video
+            class="hero-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            poster="images/idle_loop-poster.jpg"
+          >
+            <source src="images/idle_loop.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="hero-bottom">
+          <span>3D Artist / Product Visualization</span>
+
+          <a href="#work" class="scroll-link">
+            View work <span class="arrow">↓</span>
+          </a>
+        </div>
+
       </div>
-    </div>
-  </div>
-</section>
-<div class="w-layout-blockcontainer container-2 w-container">
-  <h1 class="heading">Your Ideas, Visualized.</h1>
-  <div class="w-layout-grid grid">
-    <div id="w-node-b4391f9c-6617-88a3-fca9-8e1033c4068a-95c686b8" class="div-block-5">
-      <div class="div-block-6"><h3 class="heading-2">Bring Your Vision to Life</h3><p class="paragraph-3">Transform your ideas into stunning 3D visuals that captivate and inspire your audience.</p></div>
-      <div class="div-block-6"><h3 class="heading-2">Boost Your Brand</h3><p class="paragraph-3">Elevate your marketing with high-quality 3D renderings that showcase your product&#x27;s full potential. </p></div>
-      <div class="div-block-6"><h3 class="heading-2">Innovate Your Advertising</h3><p class="paragraph-3">Stand out with immersive 3D visuals to make your business unforgettable. </p></div>
-    </div>
-    <img src="images/740e7e4c-8f5c-46f1-8988-ca884f6027cd.jpeg" loading="lazy" sizes="(max-width: 479px) 38vw, 115px" srcset="images/740e7e4c-8f5c-46f1-8988-ca884f6027cd-p-500.jpeg 500w, images/740e7e4c-8f5c-46f1-8988-ca884f6027cd-p-800.jpeg 800w, images/740e7e4c-8f5c-46f1-8988-ca884f6027cd.jpeg 1080w" alt="" class="image-16"/>
-    <div id="w-node-_94d8eb15-15f8-3990-b54e-9c2d035180cb-95c686b8" class="div-block-9-copy">
-      <div class="w-layout-grid grid-4">
-        <img src="images/chair-20draft-202.png" loading="lazy" sizes="58px" srcset="images/chair-20draft-202-p-500.png 500w, images/chair-20draft-202-p-800.png 800w, images/chair-20draft-202-p-1080.png 1080w, images/chair-20draft-202-p-1600.png 1600w, images/chair-20draft-202.png 1920w" alt=""/>
-        <img src="images/untitled.png" loading="lazy" sizes="58px" srcset="images/untitled-p-500.png 500w, images/untitled-p-800.png 800w, images/untitled-p-1080.png 1080w, images/untitled-p-1600.png 1600w, images/untitled.png 1920w" alt=""/>
-        <img src="images/oh_.png" loading="lazy" sizes="(max-width: 479px) 24vw, (max-width: 991px) 23vw, 223px" srcset="images/oh_-p-500.png 500w, images/oh_-p-800.png 800w, images/oh_-p-1080.png 1080w, images/oh_-p-1600.png 1600w, images/oh_.png 1920w" alt=""/>
-        <img src="images/draft_4.jpg" loading="lazy" sizes="(max-width: 479px) 24vw, (max-width: 991px) 23vw, 223px" srcset="images/draft_4-p-500.jpg 500w, images/draft_4-p-800.jpg 800w, images/draft_4-p-1080.jpg 1080w, images/draft_4-p-1600.jpg 1600w, images/draft_4.jpg 1920w" alt=""/>
-        <img src="images/controller.png" loading="lazy" sizes="(max-width: 479px) 24vw, (max-width: 991px) 23vw, 223px" srcset="images/controller-p-500.png 500w, images/controller-p-800.png 800w, images/controller-p-1080.png 1080w, images/controller-p-1600.png 1600w, images/controller.png 1920w" alt=""/>
-        <img src="images/wine.png" loading="lazy" sizes="(max-width: 479px) 24vw, (max-width: 991px) 23vw, 223px" srcset="images/wine-p-500.png 500w, images/wine-p-800.png 800w, images/wine-p-1080.png 1080w, images/wine-p-1600.png 1600w, images/wine.png 1920w" alt=""/>
+    </header>
+
+
+    <!-- SELECTED WORK -->
+    <section id="work">
+      <div class="container">
+
+        <div class="section-label">
+          <span><span class="number">01</span> — Selected Work</span>
+          <span>2024 — 2026</span>
+        </div>
+
+        <div class="section-intro">
+          From concept to final render — visualizing products that
+          <span class="accent-word">don't exist yet.</span>
+        </div>
+
+        <!-- Featured project -->
+        <article class="project project-featured">
+          <div class="project-image">
+            <img
+              src="images/740e7e4c-8f5c-46f1-8988-ca884f6027cd.jpeg"
+              srcset="
+                images/740e7e4c-8f5c-46f1-8988-ca884f6027cd-p-500.jpeg 500w,
+                images/740e7e4c-8f5c-46f1-8988-ca884f6027cd-p-800.jpeg 800w,
+                images/740e7e4c-8f5c-46f1-8988-ca884f6027cd.jpeg 1080w"
+              sizes="(max-width: 700px) calc(100vw - 32px), 90vw"
+              alt="Featured Apposite Design project"
+            >
+          </div>
+
+          <div class="project-meta">
+            <div class="project-number">00</div>
+            <div>
+              <div class="project-title">Featured Work</div>
+              <p class="project-description">
+                A selection of product, concept, and technical visualization
+                work created through 3D modeling, materials, lighting, and animation.
+              </p>
+            </div>
+            <div class="project-type">3D / Visualization</div>
+          </div>
+        </article>
+
+
+        <div class="project-grid">
+
+          <article class="project project-card">
+            <div class="project-image">
+              <img
+                src="images/chair-20draft-202.png"
+                srcset="
+                  images/chair-20draft-202-p-500.png 500w,
+                  images/chair-20draft-202-p-800.png 800w,
+                  images/chair-20draft-202-p-1080.png 1080w,
+                  images/chair-20draft-202-p-1600.png 1600w,
+                  images/chair-20draft-202.png 1920w"
+                sizes="(max-width: 700px) 100vw, 50vw"
+                alt="Chair 3D visualization"
+              >
+            </div>
+            <div class="project-meta">
+              <div class="project-number">01</div>
+              <div>
+                <div class="project-title">Chair Study</div>
+                <p class="project-description">
+                  Form, materials, and studio lighting explored through 3D visualization.
+                </p>
+              </div>
+              <div class="project-type">3D / Rendering</div>
+            </div>
+          </article>
+
+
+          <article class="project project-card">
+            <div class="project-image">
+              <img
+                src="images/untitled.png"
+                srcset="
+                  images/untitled-p-500.png 500w,
+                  images/untitled-p-800.png 800w,
+                  images/untitled-p-1080.png 1080w,
+                  images/untitled-p-1600.png 1600w,
+                  images/untitled.png 1920w"
+                sizes="(max-width: 700px) 100vw, 50vw"
+                alt="3D product concept"
+              >
+            </div>
+            <div class="project-meta">
+              <div class="project-number">02</div>
+              <div>
+                <div class="project-title">Product Concept</div>
+                <p class="project-description">
+                  Concept development and presentation through digital 3D modeling.
+                </p>
+              </div>
+              <div class="project-type">3D / Design</div>
+            </div>
+          </article>
+
+
+          <article class="project project-card">
+            <div class="project-image">
+              <img
+                src="images/oh_.png"
+                srcset="
+                  images/oh_-p-500.png 500w,
+                  images/oh_-p-800.png 800w,
+                  images/oh_-p-1080.png 1080w,
+                  images/oh_-p-1600.png 1600w,
+                  images/oh_.png 1920w"
+                sizes="(max-width: 700px) 100vw, 50vw"
+                alt="Technical 3D visualization"
+              >
+            </div>
+            <div class="project-meta">
+              <div class="project-number">03</div>
+              <div>
+                <div class="project-title">Technical Study</div>
+                <p class="project-description">
+                  A technical visualization focused on communicating form and function.
+                </p>
+              </div>
+              <div class="project-type">Technical / 3D</div>
+            </div>
+          </article>
+
+
+          <article class="project project-card">
+            <div class="project-image">
+              <img
+                src="images/draft_4.jpg"
+                srcset="
+                  images/draft_4-p-500.jpg 500w,
+                  images/draft_4-p-800.jpg 800w,
+                  images/draft_4-p-1080.jpg 1080w,
+                  images/draft_4-p-1600.jpg 1600w,
+                  images/draft_4.jpg 1920w"
+                sizes="(max-width: 700px) 100vw, 50vw"
+                alt="Product render"
+              >
+            </div>
+            <div class="project-meta">
+              <div class="project-number">04</div>
+              <div>
+                <div class="project-title">Product Render</div>
+                <p class="project-description">
+                  Studio-style product imagery developed for polished presentation.
+                </p>
+              </div>
+              <div class="project-type">Rendering / Marketing</div>
+            </div>
+          </article>
+
+
+          <article class="project project-card">
+            <div class="project-image">
+              <img
+                src="images/controller.png"
+                srcset="
+                  images/controller-p-500.png 500w,
+                  images/controller-p-800.png 800w,
+                  images/controller-p-1080.png 1080w,
+                  images/controller-p-1600.png 1600w,
+                  images/controller.png 1920w"
+                sizes="(max-width: 700px) 100vw, 50vw"
+                alt="Controller 3D visualization"
+              >
+            </div>
+            <div class="project-meta">
+              <div class="project-number">05</div>
+              <div>
+                <div class="project-title">Controller</div>
+                <p class="project-description">
+                  Consumer product visualization exploring shape, materials, and detail.
+                </p>
+              </div>
+              <div class="project-type">Product / 3D</div>
+            </div>
+          </article>
+
+
+          <article class="project project-card">
+            <div class="project-image">
+              <img
+                src="images/wine.png"
+                srcset="
+                  images/wine-p-500.png 500w,
+                  images/wine-p-800.png 800w,
+                  images/wine-p-1080.png 1080w,
+                  images/wine-p-1600.png 1600w,
+                  images/wine.png 1920w"
+                sizes="(max-width: 700px) 100vw, 50vw"
+                alt="Wine product visualization"
+              >
+            </div>
+            <div class="project-meta">
+              <div class="project-number">06</div>
+              <div>
+                <div class="project-title">Product Study</div>
+                <p class="project-description">
+                  Product-focused rendering with attention to materials and presentation.
+                </p>
+              </div>
+              <div class="project-type">Rendering / Product</div>
+            </div>
+          </article>
+
+
+
+
+        </div>
+
       </div>
-    </div>
-  </div>
-  <div class="div-block-9">
-    <div data-delay="4000" data-animation="slide" class="slider-3 w-slider" data-autoplay="false" data-easing="ease" data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="3" data-duration="500" data-infinite="true">
-      <div class="w-slider-mask">
-        <div class="w-slide"><img src="images/chair-20draft-202.png" loading="lazy" sizes="(max-width: 1920px) 100vw, 1920px" srcset="images/chair-20draft-202-p-500.png 500w, images/chair-20draft-202-p-800.png 800w, images/chair-20draft-202-p-1080.png 1080w, images/chair-20draft-202-p-1600.png 1600w, images/chair-20draft-202.png 1920w" alt=""/></div>
-        <div class="w-slide"><img src="images/untitled.png" loading="lazy" sizes="(max-width: 1920px) 100vw, 1920px" srcset="images/untitled-p-500.png 500w, images/untitled-p-800.png 800w, images/untitled-p-1080.png 1080w, images/untitled-p-1600.png 1600w, images/untitled.png 1920w" alt=""/></div>
-        <div class="w-slide"><img src="images/draft_4.jpg" loading="lazy" sizes="(max-width: 991px) 100vw, 922px" srcset="images/draft_4-p-500.jpg 500w, images/draft_4-p-800.jpg 800w, images/draft_4-p-1080.jpg 1080w, images/draft_4-p-1600.jpg 1600w, images/draft_4.jpg 1920w" alt=""/></div>
-        <div class="w-slide"><img src="images/oh_.png" loading="lazy" sizes="(max-width: 991px) 100vw, 922px" srcset="images/oh_-p-500.png 500w, images/oh_-p-800.png 800w, images/oh_-p-1080.png 1080w, images/oh_-p-1600.png 1600w, images/oh_.png 1920w" alt=""/></div>
+    </section>
+
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="container">
+
+        <div class="section-label">
+          <span><span class="number">02</span> — What I Do</span>
+          <span>Services</span>
+        </div>
+
+        <div class="services">
+
+          <div class="services-title">
+            Built for<br>
+            visual<br>
+            <span>impact.</span>
+          </div>
+
+          <div class="service-list">
+
+            <div class="service">
+              <div class="service-number">01</div>
+
+              <div>
+                <h3>3D Modeling</h3>
+                <p>
+                  Product and technical modeling created from sketches,
+                  references, concepts, or existing CAD.
+                </p>
+              </div>
+
+              <div class="service-dot"></div>
+            </div>
+
+
+            <div class="service">
+              <div class="service-number">02</div>
+
+              <div>
+                <h3>Product Rendering</h3>
+                <p>
+                  Photorealistic imagery for websites, presentations,
+                  advertising, and product launches.
+                </p>
+              </div>
+
+              <div class="service-dot"></div>
+            </div>
+
+
+            <div class="service">
+              <div class="service-number">03</div>
+
+              <div>
+                <h3>3D Animation</h3>
+                <p>
+                  Product advertisements, demonstrations, motion graphics,
+                  and technical animations.
+                </p>
+              </div>
+
+              <div class="service-dot"></div>
+            </div>
+
+
+            <div class="service">
+              <div class="service-number">04</div>
+
+              <div>
+                <h3>Technical Visualization</h3>
+                <p>
+                  Complex devices, mechanisms, and scientific ideas
+                  translated into clear and engaging visuals.
+                </p>
+              </div>
+
+              <div class="service-dot"></div>
+            </div>
+
+          </div>
+        </div>
       </div>
-      <div class="w-slider-arrow-left"><div class="w-icon-slider-left"></div></div>
-      <div class="w-slider-arrow-right"><div class="w-icon-slider-right"></div></div>
-      <div class="w-slider-nav w-round w-num"></div>
+    </section>
+
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+
+        <div class="section-label">
+          <span><span class="number">03</span> — About</span>
+          <span>Apposite Design</span>
+        </div>
+
+        <div class="about">
+
+          <div class="about-title">
+            Accuracy<br>
+            you can<br>
+            <span class="green">see.</span>
+          </div>
+
+          <div class="about-copy">
+
+            <p>
+              I'm David, a 3D artist with a background in biomolecular
+              science and technical design.
+            </p>
+
+            <p>
+              I turn products, devices, and ideas into visuals that are
+              easy to understand and hard to forget.
+            </p>
+
+            <div class="about-small">
+              Currently available for new visualization and animation
+              projects.
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <div class="contact-box">
+          <div class="contact-content">
+
+            <div class="contact-label">
+              04 — Start a project
+            </div>
+
+            <h2 class="contact-title">
+              Have an idea?<br>
+              Let's <span>visualize</span> it.
+            </h2>
+
+
+
+          </div>
+        </div>
+
+        <div class="brand-strip" aria-label="Apposite color palette">
+          <span class="swatch pink"></span>
+          <span class="swatch yellow"></span>
+          <span class="swatch green"></span>
+          <span class="swatch olive"></span>
+        </div>
+
+        <footer>
+          <span>© 2026 Apposite Design</span>
+          <span>3D Visualization / Product Design / Animation</span>
+        </footer>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- dotLottie: local animation.lottie, simple autoplay test -->
+  <script type="module">
+    import { DotLottie } from "https://cdn.jsdelivr.net/npm/@lottiefiles/dotlottie-web/+esm";
+
+    const canvas = document.getElementById("contact-lottie");
+    if (canvas) {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.round((rect.width || 118) * dpr);
+      canvas.height = Math.round((rect.height || 118) * dpr);
+
+      const dotLottie = new DotLottie({
+        canvas: canvas,
+        src: "images/animation.lottie",
+        autoplay: true,
+        loop: true
+      });
+
+      dotLottie.addEventListener("load", function () {
+        console.log("Lottie loaded OK. Total frames:", dotLottie.totalFrames);
+      });
+
+      dotLottie.addEventListener("loadError", function (e) {
+        console.error("Lottie failed to load:", e);
+      });
+    }
+  </script>
+
+
+  <!-- Floating contact Lottie -->
+  <a
+    href="https://calendly.com/superdave2013-do/first-meeting"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="lottie-contact"
+    aria-label="Book a meeting"
+  >
+    <div class="lottie-contact-inner">
+      <canvas id="contact-lottie"></canvas>
+      <span class="lottie-contact-label">LET'S TALK <b>↗</b></span>
     </div>
-  </div>
-  <div class="div-block-8">
-    <div class="code-embed w-embed w-script">
-      <!-- Calendly inline widget begin -->
-      <div class="calendly-inline-widget" data-url="https://calendly.com/superdave2013-do/first-meeting" style="min-width:320px;height:700px;"></div>
-      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-      <!-- Calendly inline widget end -->
-    </div>
-  </div>
-</div>
-<script src="js/jquery.js" type="text/javascript"></script>
-<script src="js/webflow.schunk.7321a5097fb66f41.js" type="text/javascript"></script>
-<script src="js/webflow-script.js" type="text/javascript"></script>
+  </a>
+
 </body>
 </html>
